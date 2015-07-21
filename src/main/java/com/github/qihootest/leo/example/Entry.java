@@ -3,10 +3,11 @@
  */
 package com.github.qihootest.leo.example;
 
-import com.github.qihootest.leo.dispatch.report.TestReport;
+import com.github.autotest.sapient.dispatch.report.TestReport;
+import com.github.autotest.sapient.ift.IftConf;
+import com.github.autotest.sapient.ift.IftExec;
 import com.github.qihootest.leo.example.project.DemoCasesUtils;
-import com.github.qihootest.leo.ift.IftConf;
-import com.github.qihootest.leo.ift.IftExec;
+
 
 /**
  * @author lianghui (lianghui@360.cn)

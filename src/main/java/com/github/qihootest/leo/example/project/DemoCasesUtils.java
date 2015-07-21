@@ -2,11 +2,11 @@ package com.github.qihootest.leo.example.project;
 
 import java.util.TreeMap;
 
-import com.github.qihootest.leo.ift.core.CasesUtils;
-import com.github.qihootest.leo.ift.core.IFtResultInfo;
-import com.github.qihootest.leo.ift.testcase.IftTestCase;
-import com.github.qihootest.leo.ift.util.CommonSign;
-import com.github.qihootest.leo.toolkit.httpclient.ResponseInfo;
+import com.github.autotest.sapient.ift.core.CasesUtils;
+import com.github.autotest.sapient.ift.core.IFtResultInfo;
+import com.github.autotest.sapient.ift.testcase.IftTestCase;
+import com.github.autotest.sapient.ift.util.CommonSign;
+import com.github.autotest.sapient.toolkit.httpclient.ResponseInfo;
 
 /**
  * 说明：接口执行类，必须继承自类CasesUtils
@@ -49,7 +49,7 @@ public class DemoCasesUtils {
 		//获取处理后的实际结果 目前只支持json\xml格式  如果接口返回结果不是此两种格式 则需要把actRes转换为json或xml格式
 		String actRes= resInfo.getResBodyInfo();
 		//预期值与实际值比对 并返回IFtResultInfo类型
-		return getIFtResultInfo(resInfo, expRes, actRes);
+		return casesUtils.getIFtResultInfo(resInfo, expRes, actRes);
 	}
 	
 	public IFtResultInfo DemoMethod2(IftTestCase testcase)  {

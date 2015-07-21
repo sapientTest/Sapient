@@ -4,17 +4,14 @@ package com.github.qihootest.leo.example;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-import com.github.qihootest.leo.dispatch.DispatchConf;
-import com.github.qihootest.leo.dispatch.ExecTask;
-import com.github.qihootest.leo.dispatch.report.TestReport;
-import com.github.qihootest.leo.dispatch.run.TestRunInfo;
-import com.github.qihootest.leo.dispatch.testcase.ICase;
+import com.github.autotest.sapient.dispatch.DispatchConf;
+import com.github.autotest.sapient.dispatch.ExecTask;
+import com.github.autotest.sapient.dispatch.report.TestReport;
+import com.github.autotest.sapient.dispatch.run.TestRunInfo;
+import com.github.autotest.sapient.dispatch.testcase.ICase;
+import com.github.autotest.sapient.ift.IftConf;
+import com.github.autotest.sapient.ift.testcase.autocreate.IftDataFileCase;
 import com.github.qihootest.leo.example.project.DemoCasesUtils;
-import com.github.qihootest.leo.ift.IftConf;
-import com.github.qihootest.leo.ift.testcase.autocreate.IftDataFileCase;
-
 
 public class Entry3 {
 
