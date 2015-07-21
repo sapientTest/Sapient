@@ -1,4 +1,4 @@
-package com.github.qihootest.leo.example;
+package com.github.autotest.sapient.demo;
 
 
 import java.util.ArrayList;
@@ -9,9 +9,9 @@ import com.github.autotest.sapient.dispatch.ExecTask;
 import com.github.autotest.sapient.dispatch.report.TestReport;
 import com.github.autotest.sapient.dispatch.run.TestRunInfo;
 import com.github.autotest.sapient.dispatch.testcase.ICase;
+import com.github.autotest.sapient.example.project.DemoCasesUtils;
 import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.ift.testcase.autocreate.IftDataFileCase;
-import com.github.qihootest.leo.example.project.DemoCasesUtils;
 
 public class Entry3 {
 

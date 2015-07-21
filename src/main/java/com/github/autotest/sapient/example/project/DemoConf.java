@@ -1,4 +1,4 @@
-package com.github.qihootest.leo.example.project;
+package com.github.autotest.sapient.example.project;
 
 public class DemoConf {
 

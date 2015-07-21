@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.github.qihootest.leo.example;
+package com.github.autotest.sapient.demo;
 
 import com.github.autotest.sapient.dispatch.report.TestReport;
+import com.github.autotest.sapient.example.project.DemoCasesUtils;
 import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.ift.IftExec;
-import com.github.qihootest.leo.example.project.DemoCasesUtils;
 
 
 /**
