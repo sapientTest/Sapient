@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.github.autotest.sapient.demo;
 
 import com.github.autotest.sapient.dispatch.report.TestReport;
