@@ -1,4 +1,4 @@
-package com.github.qihootest.leo.dispatch;
+package com.github.autotest.sapient.dispatch;
 
 import java.util.ArrayList;
 import java.util.List;

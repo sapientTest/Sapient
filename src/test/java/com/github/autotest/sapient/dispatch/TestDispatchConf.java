@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.github.qihootest.leo.dispatch;
+package com.github.autotest.sapient.dispatch;
 
 import com.github.autotest.sapient.dispatch.DispatchConf;
 

@@ -221,7 +221,7 @@ public class HttpUtil {
 		headers.put("Accept-Charset", "GBK,utf-8;q=0.7,*;q=0.3");
 //		headers.put("Accept-Encoding", "deflate,sdch");
 		headers.put("Accept-Language", "zh-CN,zh;q=0.8");
-		headers.put("User-Agent", "QihooTest-Leo/1.0.0 Apache-HttpClient/4.2.5 (java 1.7)");
+		headers.put("User-Agent", "AutoTest-sapient/1.0.0 Apache-HttpClient/4.2.5 (java 1.7)");
 		headers.put("Accept", "*/*");
 		headers.put("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 		return headers;

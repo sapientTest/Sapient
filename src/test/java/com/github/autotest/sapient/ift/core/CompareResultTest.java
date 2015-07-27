@@ -1,4 +1,4 @@
-package com.github.qihootest.leo.ift.core;
+package com.github.autotest.sapient.ift.core;
 
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;

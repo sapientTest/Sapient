@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.github.qihootest.leo.toolkit;
+package com.github.autotest.sapient.ift.tookit;
 
 import com.github.autotest.sapient.toolkit.mysql.dao.Table;
 

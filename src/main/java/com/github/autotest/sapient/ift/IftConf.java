@@ -30,7 +30,7 @@ public class IftConf{
 	/**
 	 * 接口ift配置等文件默认保存目录
 	 */
-	public static  String IftPath = RootPath+"leo/ift/";
+	public static  String IftPath = RootPath+"sapient/ift/";
 	/**
 	 * 默认编译输出目录
 	 */
@@ -51,7 +51,7 @@ public class IftConf{
 	/**
 	 * 默认生成java文件时的包名
 	 */
-	public static String PackageName = "com.github.qihootest.leo.ift.testcase";
+	public static String PackageName = "com.github.autotest.sapient.ift.testcase";
 
 	/**
 	 * 默认的模板文件
