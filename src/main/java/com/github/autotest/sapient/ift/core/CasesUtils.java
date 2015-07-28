@@ -383,6 +383,23 @@ public class CasesUtils {
 		}
 		return signMap;
 	}
+	
+	/**
+	 * 更新参与签名计算、url参数、form参数、header参数的List到用例中
+	 * @param testCase
+	 * @param urlParaCheck
+	 * @param formParaCheck
+	 * @param headerParaCheck
+	 * @param conf
+	 * @return
+	 */
+	public IftTestCase updateAllToListForCase(IftTestCase testCase,String[] urlParaCheck, 
+			String[] formParaCheck,String[] headerParaCheck,Object conf) {
+		//更新配置文件中的全局Header和Host
+		testCase = this.updateAllToConfForCase(testCase, conf, headerParaCheck);
+		//更新参与签名计算、url参数、form参数、header参数(excel)的List到用例中
+		return this.updateAllToListForCase(testCase, urlParaCheck, formParaCheck, headerParaCheck);
+	}
 
 	/**
 	 * 更新参与签名计算、url参数、form参数、header参数的List到用例中
@@ -392,7 +409,7 @@ public class CasesUtils {
 	 * @param headerParaCheck
 	 * @return  IftTestCase
 	 */
-	public IftTestCase updateAllToListForCase(IftTestCase testcase,String[] urlParaCheck, 
+	private IftTestCase updateAllToListForCase(IftTestCase testcase,String[] urlParaCheck, 
 			String[] formParaCheck,String[] headerParaCheck) {
 		ArrayList<String> signList = new ArrayList<String>();// 参与签名计算的参数名列表
 		ArrayList<String> urlParaList = new ArrayList<String>();// 参与url拼接的参数名列表
@@ -488,7 +505,7 @@ public class CasesUtils {
 	 * @param randNum
 	 * @return IftTestCase
 	 */
-	public IftTestCase updateAllParaForCase(IftTestCase testCase,int randNum) {
+	public IftTestCase updateAllParaForCase(IftTestCase testCase) {
 		LinkedHashMap<String, String> caseMap = testCase.getCaseMap();
 		if (null == caseMap || caseMap.size() < 1) {
 			log.error("用例的参数值对为空，请检查");
@@ -517,7 +534,7 @@ public class CasesUtils {
 			}
 			// 针对参数值特殊标识rand的处理，随机生成长度为10个字符串
 			if (value.toLowerCase().equalsIgnoreCase("rand")) {
-				value = CommUtils.getRandomStr(randNum);
+				value = CommUtils.getRandomStr(IftConf.RandNum);
 				caseMap.put(key, value);
 			}
 			// 针对参数值特殊标识timestamp的处理，获取Unix格式时间戳
@@ -656,7 +673,7 @@ public class CasesUtils {
      * @param HeardPara
      * @return testcase
      */
-    public IftTestCase updateAllToConfForCase(IftTestCase testCase, 
+    private IftTestCase updateAllToConfForCase(IftTestCase testCase, 
     		Object conf, String[] HeardPara) {
 		LinkedHashMap<String, String> caseMap = testCase.getCaseMap(); //获取参数Map
     	HashMap paraValue = new HashMap();

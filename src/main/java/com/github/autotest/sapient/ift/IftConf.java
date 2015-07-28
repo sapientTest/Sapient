@@ -98,6 +98,9 @@ public class IftConf{
 	//时间样式设置
 	    public static String DateFormat =  getPropValue("dateFormat","yyyMMddHHmmss");
 	
+	//关键字rand的字符长度
+	    public static int RandNum = Integer.parseInt(getPropValue("RandNum","10"));
+	
 	//设置发起请求时使用的编码
 	    public static String EnCode = getPropValue("EnCode","utf-8");
 	    
