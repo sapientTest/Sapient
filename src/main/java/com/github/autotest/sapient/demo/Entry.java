@@ -1,7 +1,7 @@
 package com.github.autotest.sapient.demo;
 
+import com.github.autotest.sapient.demo.project.DemoCasesUtils;
 import com.github.autotest.sapient.dispatch.report.TestReport;
-import com.github.autotest.sapient.example.project.DemoCasesUtils;
 import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.ift.IftExec;
 
@@ -17,9 +17,6 @@ public class Entry {
 		//依赖的jar文件路径信息  必须设置 以maven方式运行一次后会记录本地库jar文件位置
 		if (!IftConf.updateJarFile(args)) return;
 		
-		//其它设置  
-//		IftConf.ProxyEnable="Y";//启用代理，默认为不启用
-		
 		//添加用例
 		IftExec iftExec = new IftExec();
 		/**
@@ -31,10 +28,8 @@ public class Entry {
 		 */
 		String excelFilePath = IftConf.RootPath+"demo.xlsx";
 		
-		iftExec.addCase(excelFilePath,"Sheet1","用例名称1",
-				DemoCasesUtils.class,"DemoMethod1");
-		iftExec.addCase(excelFilePath,"Sheet2","用例名称2",
-				DemoCasesUtils.class,"DemoMethod1");
+		iftExec.addCase(excelFilePath,"Sheet1","用例名称1",DemoCasesUtils.class,"DemoMethod1");
+		iftExec.addCase(excelFilePath,"Sheet2","用例名称2",DemoCasesUtils.class,"DemoMethod1");
 		
 		//执行
 		TestReport report=iftExec.run();

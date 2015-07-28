@@ -1,4 +1,4 @@
-package com.github.autotest.sapient.example.project;
+package com.github.autotest.sapient.demo.project;
 
 import java.util.TreeMap;
 
