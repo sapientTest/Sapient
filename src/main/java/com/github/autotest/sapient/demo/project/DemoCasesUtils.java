@@ -26,9 +26,7 @@ public class DemoCasesUtils {
 		CasesUtils casesUtils = new CasesUtils();
 		//暂停100毫秒
 //		BaseTools.sleep(100);
-		//设置用例使用的header信息--可选
-		testcase.setHeaderMap(new TreeMap<String,String>());
-		//更新DemoConf中的header参数值
+		//更新配置文件中的全局Header和Host
 		DemoConf conf = new DemoConf();
 		testcase = casesUtils.updateAllToConfForCase(testcase, conf, DemoConf.HeardPara);
 		//更新用例的签名计算、url参数、form参数、header参数--必须
