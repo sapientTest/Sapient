@@ -26,14 +26,10 @@ public class DemoCasesUtils {
 		CasesUtils casesUtils = new CasesUtils();
 		//暂停100毫秒
 //		BaseTools.sleep(100);
-		//更新配置文件中的全局Header和Host
-		DemoConf conf = new DemoConf();
-		testcase = casesUtils.updateAllToConfForCase(testcase, conf, DemoConf.HeardPara);
 		//更新用例的签名计算、url参数、form参数、header参数--必须
-		//是接口参数的父集
-		testcase=casesUtils.updateAllToListForCase(testcase, DemoConf.GetPara, DemoConf.PostPara, DemoConf.HeardPara);
-		//更新用例参数值，针对rand等特殊标识处理--必须
-		testcase=casesUtils.updateAllParaForCase(testcase,10);
+		testcase=casesUtils.updateAllToListForCase(testcase, DemoConf.GetPara, DemoConf.PostPara, DemoConf.HeardPara,new DemoConf());
+		//更新用例参数值，针对rand、timetamp、date等特殊标识处理--必须
+		testcase=casesUtils.updateAllParaForCase(testcase);
 		//更新用例签名值--可选  如果无需计算签名  则不需要
 		testcase=casesUtils.updateSignValueForCase(testcase, CommonSign.signMethodThird(casesUtils.getSignMap(testcase), DemoConf.SecretKey));
 		//发起请求
