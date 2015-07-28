@@ -45,6 +45,7 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.toolkit.httpclient.ResponseInfo;
 import com.github.autotest.sapient.toolkit.util.LogUtil;
 import com.github.autotest.sapient.toolkit.util.StringUtil;
@@ -64,7 +65,7 @@ public class HttpsUtil extends HttpUtil {
 	 * 默认构造函数
 	 */
 	public HttpsUtil() {
-		this.charset = "UTF-8";
+		this.charset = IftConf.EnCode;
 		httpClient = this.setHttpClient(httpClient);
 		httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,CookiePolicy.BROWSER_COMPATIBILITY);
 		httpClient.getConnectionManager().closeIdleConnections(30,TimeUnit.SECONDS);
@@ -292,16 +293,6 @@ public class HttpsUtil extends HttpUtil {
 	 */
 	public void close() {
 		httpClient.getConnectionManager().shutdown();
-	}
-
-	/**
-	 * 设置编码
-	 * @param charset
-	 */
-	public void setCharset(String charset) {
-		if (null != charset && charset.length() > 0) {
-			this.charset = charset;
-		}
 	}
 	
 	/**

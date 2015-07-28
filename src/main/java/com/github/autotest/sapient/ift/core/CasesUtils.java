@@ -71,13 +71,6 @@ public class CasesUtils {
 		this.headersMap = new TreeMap<String, String>();
 		this.urlParaMap = new LinkedHashMap<String, String>();
 		this.formParaMap = new LinkedHashMap<String, String>();
-		if (IftConf.ProxyEnable.equals("Y")) {
-			log.info("已设置使用代理："+IftConf.ProxyIp+":"+IftConf.PROXY_PORT);
-			httpUtil = new HttpUtil(IftConf.ProxyIp,IftConf.PROXY_PORT);
-		} else {
-			log.info("未设置代理");
-			httpUtil = new HttpUtil();
-		}
 	}
 
 	/**
@@ -88,8 +81,7 @@ public class CasesUtils {
 	 */
 	public ResponseInfo execResquest(IftTestCase testCase) {
 		ResponseInfo resInfo=new ResponseInfo();
-		// 设置发起请求时使用的编码
-		this.httpUtil.setCharset(testCase.getEnCoding());
+
 		// 获取发起请求的http地址
 		if (!updateHttpUrl(testCase)) {
 			log.error("发起http请求时，获取http地址失败");
@@ -119,9 +111,22 @@ public class CasesUtils {
 			//使用本地ssl认证信息
 			if(IftConf.SSL.equals("Y")){
 				httpUtil = new HttpsUtil(IftConf.KeyPath,IftConf.KeyPassword);
-			}else{
-				//不需要认证信息
-				httpUtil = new HttpsUtil();
+			}else{//不需要认证信息	
+				if (IftConf.ProxyEnable.equals("Y")) {
+					log.info("已设置使用代理："+IftConf.ProxyIp+":"+IftConf.PROXY_PORT);
+					httpUtil = new HttpsUtil(IftConf.ProxyIp,IftConf.PROXY_PORT);
+				} else {
+					log.info("未设置代理");
+					httpUtil = new HttpsUtil();
+				}
+			}
+		}else if(getProtocol().equals("http")){
+			if (IftConf.ProxyEnable.equals("Y")) {
+				log.info("已设置使用代理："+IftConf.ProxyIp+":"+IftConf.PROXY_PORT);
+				httpUtil = new HttpUtil(IftConf.ProxyIp,IftConf.PROXY_PORT);
+			} else {
+				log.info("未设置代理");
+				httpUtil = new HttpUtil();
 			}
 		}
 		try {
@@ -137,9 +142,9 @@ public class CasesUtils {
 			}
 		} catch (Exception e) {
 			log.error("发送http请求异常");
-			log.error("httpurl:" + httpUrl);
-			log.error("getUrl:" + getUrl);
-			log.error("postUrl:" + postUrl);
+			log.error("url:" + httpUrl);
+			log.error("getParam:" + getUrl);
+			log.error("postParam:" + postUrl);
 			log.error(e.getMessage());
 			resInfo.setErrMsgInfo("发送http请求异常,请查看执行日志记录");
 			return resInfo;
@@ -158,7 +163,7 @@ public class CasesUtils {
 	 * @return IFtResultInfo
 	 */
 	public IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,String expRes,String actRes) {
-		return getIFtResultInfo(resInfo, expRes,actRes, 1);
+		return getIFtResultInfo(resInfo, expRes,actRes, IftConf.JsonNum);
 	}
 	/**
 	 * 返回结果比对后的信息
@@ -571,7 +576,6 @@ public class CasesUtils {
 	public ResponseInfo ExecPostResquest(TreeMap<String, String> header,String http, String posturl) {
 		ResponseInfo resInfo=new ResponseInfo();
 		// 设置发起请求时使用的编码
-		this.httpUtil.setCharset("UTF-8");
 		try {
 			// 发起请求
 			resInfo= httpUtil.post(header, http, posturl);
@@ -593,8 +597,6 @@ public class CasesUtils {
 	 */
 	public ResponseInfo ExecGetResquest(TreeMap<String, String> header,String gethttpurl) {
 		ResponseInfo resInfo=new ResponseInfo();
-		// 设置发起请求时使用的编码
-		this.httpUtil.setCharset("UTF-8");
 		try {
 			// 发起请求
 			resInfo= httpUtil.get(header, gethttpurl);
@@ -676,7 +678,6 @@ public class CasesUtils {
      */
     private static void updateUrlHost(IftTestCase testCase,HashMap paraValue){
     	if(testCase.getUrl().equalsIgnoreCase("host")){
-    		System.out.println("==="+paraValue.get("Host"));
     		if((null != paraValue.get("Host"))& (paraValue.get("Host").toString().length()>0)){
     			testCase.setUrl((String) paraValue.get("Host"));
     		}else{

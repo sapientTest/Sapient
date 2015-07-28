@@ -112,6 +112,9 @@ public class IftConf{
 	    
     //任务名称
 	    public static String TaskName = getPropValue("TaskName","接口测试");
+	
+    //解析json层级(0为多层解析，1为单层解析)
+	    public static int JsonNum = Integer.parseInt(getPropValue("JsonNum","0"));
        
 	//结果比对参数
 		/**

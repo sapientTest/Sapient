@@ -39,7 +39,7 @@ public class CompareResult {
 	 * 说明：期望结果与实际结果的比对  
 	 * @param expRes 预期结果
 	 * @param actRes 从请求响应中提取过滤后的实际结果
-	 * @param config 可选参数默认为1，只解析一层，2时全解析
+	 * @param config 可选参数默认为1，只解析一层，0时全解析
 	 * @return boolean 相同时返回true，不同时返回false
 	 */
 	public boolean getCompareResult(String expRes, String actRes,int config){
@@ -162,7 +162,7 @@ public class CompareResult {
 	}
 
 	/**
-	 * 单个预期结果值与对应实际结果值的比对，支持预期结果值以#标识分割，多个预期结果的处理
+	 * 单个预期结果值与对应实际结果值的比对，支持预期结果为数组，多个预期结果的处理
 	 * @param expValue
 	 * @param actValue
 	 * @return boolean
@@ -274,9 +274,9 @@ public class CompareResult {
 		} else{
 			if(config == 1){//单层方式解析json串
 				map = JsonUtil.getResult(responseRes);
-			}else if(config == 2){//多层方式解析json串
+			}else if(config == 0){//多层方式解析json串
 				map = JsonUtil.getAllResult(responseRes);
-			}else{//config不为1、2时  按单层方式解析
+			}else{//config不为1、0时  按单层方式解析
 				map = JsonUtil.getResult(responseRes);
 			}
 			if(map == null){

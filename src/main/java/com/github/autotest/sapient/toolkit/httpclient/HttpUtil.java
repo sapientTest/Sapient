@@ -34,6 +34,7 @@ import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.toolkit.util.LogUtil;
 import com.github.autotest.sapient.toolkit.util.StringUtil;
 
@@ -52,7 +53,7 @@ public class HttpUtil {
 	 * 默认构造函数
 	 */
 	public HttpUtil() {
-		this.charset = "UTF-8"; 
+		this.charset = IftConf.EnCode; 
 		PoolingClientConnectionManager pccm = new PoolingClientConnectionManager();
         pccm.setMaxTotal(100); //设置整个连接池最大链接数
 		httpClient = new DefaultHttpClient(pccm);
@@ -194,16 +195,6 @@ public class HttpUtil {
 	 */
 	public void close() {
 		httpClient.getConnectionManager().shutdown();
-	}
-
-	/**
-	 * 设置编码
-	 * @param charset
-	 */
-	public void setCharset(String charset) {
-		if (null != charset && charset.length() > 0) {
-			this.charset = charset;
-		}
 	}
 	
 	/**
