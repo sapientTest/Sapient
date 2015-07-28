@@ -37,7 +37,7 @@ public class IftExec {
 		runInfo = new TestRunInfo();
 		caseList = new ArrayList<>();//用例列表
 		dataCase = new IftDataFileCase();
-		dataCase.setIftTaskName("接口测试");		
+		dataCase.setIftTaskName(IftConf.TaskName);		
 	}
 	
 	/**

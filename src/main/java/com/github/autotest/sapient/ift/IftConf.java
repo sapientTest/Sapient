@@ -109,6 +109,9 @@ public class IftConf{
 	    
 	//多线程任务执行个数
 	    public static int ThreadCont = Integer.parseInt(getPropValue("ThreadCont","10"));
+	    
+    //任务名称
+	    public static String TaskName = getPropValue("TaskName","接口测试");
        
 	//结果比对参数
 		/**
