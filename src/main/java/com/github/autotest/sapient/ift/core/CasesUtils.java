@@ -153,6 +153,23 @@ public class CasesUtils {
 		// 存储执行结果和拼接的url
 		return resInfo;
 	}
+	
+	/**
+	 * 预期结果与实际结果对比
+	 * @param resInfo
+	 * @param testcase
+	 * @return
+	 */
+	public IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,IftTestCase testcase) {
+		String expRes=testcase.getCaseMap().get("Expres");
+		if (expRes=="" || null==expRes) {
+			expRes="预期结果为空";
+		}
+		//获取处理后的实际结果 目前只支持json\xml格式  如果接口返回结果不是此两种格式 则需要把actRes转换为json或xml格式
+		String actRes= resInfo.getResBodyInfo();
+		//对比actRes与expRes
+		return getIFtResultInfo(resInfo, expRes,actRes);
+	}
 
 	
 	/**
@@ -173,7 +190,7 @@ public class CasesUtils {
 	 * @param parseJson json的解析方式 默认为单层解析
 	 * @return IFtResultInfo
 	 */
-	public IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,String expRes,String actRes,int parseJson) {
+	private IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,String expRes,String actRes,int parseJson) {
 		IFtResultInfo iFtResultInfo =  new IFtResultInfo();
 		//结果比对处理类 目前只能处理json和xml格式
 		CompareResult comresult=new CompareResult();
