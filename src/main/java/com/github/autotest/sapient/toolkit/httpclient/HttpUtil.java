@@ -1,10 +1,16 @@
 package com.github.autotest.sapient.toolkit.httpclient;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +18,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -25,7 +35,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.client.params.CookiePolicy;
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
@@ -52,7 +66,7 @@ public class HttpUtil {
 	/**
 	 * 默认构造函数
 	 */
-	public HttpUtil() {
+	private HttpUtil() {
 		this.charset = IftConf.EnCode; 
 		PoolingClientConnectionManager pccm = new PoolingClientConnectionManager();
         pccm.setMaxTotal(100); //设置整个连接池最大链接数
@@ -62,12 +76,17 @@ public class HttpUtil {
 	}
 
 	/**
-	 * 构造函数 设置编码
-	 * @param charset
+	 * 构造函数 并设置请求的协议类型
+	 * @param protocol
 	 */
-	public HttpUtil(String charset) {
+	public HttpUtil(String protocol) {
 		this();
-		this.charset = charset;
+		if(protocol.equals("https")&IftConf.SSL.equalsIgnoreCase("N")){ //https不使用本地认证信息
+			httpClient = this.setHttpClient(httpClient);
+		}else if(protocol.equals("https")&IftConf.SSL.equalsIgnoreCase("Y")){ //https并使用本地认证信息
+			httpClient = this.setHttpClient(IftConf.KeyPath,IftConf.KeyPassword);
+		}
+		
 	}
 	
 	/**
@@ -75,11 +94,84 @@ public class HttpUtil {
 	 * 
 	 * @param ip
 	 * @param port
+	 * @param  protocol
 	 */
-	public HttpUtil(String ip, int port) {
-		this();
+	public HttpUtil(String ip, int port, String protocol) {
+		this(protocol);
 		HttpHost proxy = new HttpHost(ip, port);
 		httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,proxy);
+	}
+	
+	/**
+	 * 设置https请求头信息
+	 * @param httpClient
+	 * @return httpClient
+	 */
+	private HttpClient setHttpClient(HttpClient httpClient) {
+		final X509Certificate[] _AcceptedIssuers = new X509Certificate[] {};
+		try {
+			SSLContext ctx = SSLContext.getInstance("TLS");
+			X509TrustManager tm = new X509TrustManager() {
+				@Override
+				public X509Certificate[] getAcceptedIssuers() {
+					return _AcceptedIssuers;
+				}
+
+				@Override
+				public void checkServerTrusted(X509Certificate[] chain,
+						String authType) throws CertificateException {
+				}
+
+				@Override
+				public void checkClientTrusted(X509Certificate[] chain,
+						String authType) throws CertificateException {
+				}
+			};
+			ctx.init(null, new TrustManager[] { tm }, new SecureRandom());
+			SSLSocketFactory ssf = new SSLSocketFactory(ctx, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+			ClientConnectionManager ccm = httpClient.getConnectionManager();
+			SchemeRegistry sr = ccm.getSchemeRegistry();
+			sr.register(new Scheme("https", 443, ssf));
+			return new DefaultHttpClient(ccm, httpClient.getParams());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return httpClient;
+	}
+	
+	/**
+	 * 设置https请求头信息
+	 * @param keyPath
+	 * @param keyPassword
+	 * @return httpClient
+	 */
+	private HttpClient setHttpClient(String keyPath,String keyPassword){
+		try {
+			KeyStore trustStore = KeyStore.getInstance(KeyStore.getDefaultType());
+			FileInputStream instream = new FileInputStream(new File(keyPath));
+			// 加载keyStore 
+			try {
+				trustStore.load(instream, keyPassword.toCharArray());
+			} catch (CertificateException e) {
+				log.error(e);
+			} catch (IOException e) {
+				log.error(e);
+			}
+			// 穿件Socket工厂,将trustStore注入
+			SSLSocketFactory socketFactory;
+			socketFactory = new SSLSocketFactory(trustStore);
+			Scheme sch = new Scheme("https", 443, socketFactory);// 创建Scheme
+			this.httpClient.getConnectionManager().getSchemeRegistry().register(sch);// 注册Scheme
+			this.httpClient.getParams().setParameter(ClientPNames.COOKIE_POLICY,CookiePolicy.BROWSER_COMPATIBILITY);
+			this.httpClient.getConnectionManager().closeIdleConnections(30,TimeUnit.SECONDS);
+		} catch (KeyStoreException e) {
+			log.error(e);
+		} catch (FileNotFoundException e) {
+			log.error(e);
+		} catch (Exception e) {
+			log.error(e);
+		} 
+		return httpClient;
 	}
 
 	//--对外get处理方法

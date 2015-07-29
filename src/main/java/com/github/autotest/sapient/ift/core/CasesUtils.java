@@ -16,7 +16,6 @@ import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.ift.testcase.IftTestCase;
 import com.github.autotest.sapient.ift.util.ExportReportExcel;
 import com.github.autotest.sapient.toolkit.httpclient.HttpUtil;
-import com.github.autotest.sapient.toolkit.httpclient.HttpsUtil;
 import com.github.autotest.sapient.toolkit.httpclient.ResponseInfo;
 import com.github.autotest.sapient.toolkit.util.CommUtils;
 import com.github.autotest.sapient.toolkit.util.LogUtil;
@@ -106,28 +105,13 @@ public class CasesUtils {
 			resInfo.setErrMsgInfo("发起http请求时，获取headers信息失败");
 			return resInfo;
 		}
-		// 调用https对象进行重新赋值
-		if(getProtocol().equals("https")){
-			//使用本地ssl认证信息
-			if(IftConf.SSL.equals("Y")){
-				httpUtil = new HttpsUtil(IftConf.KeyPath,IftConf.KeyPassword);
-			}else{//不需要认证信息	
-				if (IftConf.ProxyEnable.equals("Y")) {
-					log.info("已设置使用代理："+IftConf.ProxyIp+":"+IftConf.PROXY_PORT);
-					httpUtil = new HttpsUtil(IftConf.ProxyIp,IftConf.PROXY_PORT);
-				} else {
-					log.info("未设置代理");
-					httpUtil = new HttpsUtil();
-				}
-			}
-		}else if(getProtocol().equals("http")){
-			if (IftConf.ProxyEnable.equals("Y")) {
-				log.info("已设置使用代理："+IftConf.ProxyIp+":"+IftConf.PROXY_PORT);
-				httpUtil = new HttpUtil(IftConf.ProxyIp,IftConf.PROXY_PORT);
-			} else {
-				log.info("未设置代理");
-				httpUtil = new HttpUtil();
-			}
+		//设置代理
+		if (IftConf.ProxyEnable.equals("Y")) {
+			log.info("已设置使用代理："+IftConf.ProxyIp+":"+IftConf.PROXY_PORT);
+			httpUtil = new HttpUtil(IftConf.ProxyIp,IftConf.PROXY_PORT,getProtocol());
+		} else {
+			log.info("未设置代理");
+			httpUtil = new HttpUtil(getProtocol());
 		}
 		try {
 			// 发起请求
