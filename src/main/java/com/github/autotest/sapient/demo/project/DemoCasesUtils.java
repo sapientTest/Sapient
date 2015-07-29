@@ -34,16 +34,10 @@ public class DemoCasesUtils {
 		testcase=casesUtils.updateSignValueForCase(testcase, CommonSign.signMethodThird(casesUtils.getSignMap(testcase), DemoConf.SecretKey));
 		//发起请求
 		ResponseInfo resInfo = casesUtils.execResquest(testcase);
-		//预期结果格式为key1=value1&key2=value2  或key1=value11#value12&key2=value2 支持一个可以对应多个值
-		String expRes=testcase.getCaseMap().get("Expres");
-		if (expRes=="" || null==expRes) {
-			expRes="预期结果为空";
-		}
+		//关闭httpclient连接
 		casesUtils.closeConn();
-		//获取处理后的实际结果 目前只支持json\xml格式  如果接口返回结果不是此两种格式 则需要把actRes转换为json或xml格式
-		String actRes= resInfo.getResBodyInfo();
 		//预期值与实际值比对 并返回IFtResultInfo类型
-		return casesUtils.getIFtResultInfo(resInfo, expRes, actRes);
+		return casesUtils.getIFtResultInfo(resInfo, testcase);
 	}
 	
 	public IFtResultInfo DemoMethod2(IftTestCase testcase)  {
