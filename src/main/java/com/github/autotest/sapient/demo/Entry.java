@@ -4,6 +4,7 @@ import com.github.autotest.sapient.demo.project.DemoCasesUtils;
 import com.github.autotest.sapient.dispatch.report.TestReport;
 import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.ift.IftExec;
+import com.github.autotest.sapient.toolkit.mysql.MysqlUtil;
 
 
 /**
@@ -16,6 +17,12 @@ public class Entry {
 	public static void main(String[] args) {
 		//依赖的jar文件路径信息  必须设置 以maven方式运行一次后会记录本地库jar文件位置
 		if (!IftConf.updateJarFile(args)) return;
+		
+		//数据库初始化，如果需要则打开注解
+//		MysqlUtil msq= new MysqlUtil() ;
+//		msq.connMysql(ip, port, dataName, userName, passWord);
+//		msq.excSql("select * from table");
+//		msq.closedConn();
 		
 		//添加用例
 		IftExec iftExec = new IftExec();
