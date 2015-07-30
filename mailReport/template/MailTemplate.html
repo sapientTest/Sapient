@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta name="author" content="" />
+	<title>#title#</title>
+</head>
+<style type="text/css">
+body{
+  margin:0 auto;
+  padding: 0;
+  scroll:no;
+  font-size: 12px;
+  font-family:'Microsoft YaHei',微软雅黑, tahoma, arial;
+  background-repeat:repeat;
+}
+form{
+	margin: 6px auto;
+	padding: 0;
+	width: 100%;
+}
+table{
+  margin:6px auto;
+  width:955px;
+  HEIGHT: 100px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+div.all_content{
+  width:100%;
+  height: 100px;
+  border:1px;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/*****************datagrid2*******************/
+table.datagrid2{
+	  HEIGHT: 10px;
+      WIDTH: 955px;
+	  border-spacing: 0;
+      border-collapse: collapse; 
+	  white-space: nowrap; 
+	  <!--table-layout:fixed-->
+}
+table.datagrid2 th{
+    text-align: middle;
+    background: #2a7fb7;
+    padding: 1px;
+    border: 1px #F0FFF0 solid;
+    word-break: break-all;
+	white-space:nowrap;
+	text-align:center;
+}
+table.datagrid2 td{
+    padding: 1px;
+	border: 1px #2a7fb7 solid;
+	word-break: break-all;
+	white-space:nowrap;
+    
+}
+table.datagrid2 tr{
+    height:15px;
+    padding: 1px;
+	border: 1px #2a7fb7 solid;
+}
+/*****************datagrid3*******************/
+table.datagrid3{
+	  HEIGHT: 10px;
+      WIDTH: 955px;
+	  border-spacing: 0;
+      border-collapse: collapse; 
+	  
+	  <!--table-layout:fixed-->
+}
+table.datagrid3 th{
+    text-align: middle;
+    background: #2a7fb7;
+    padding: 1px;
+    border: 1px #F0FFF0 solid;
+	word-break: break-all;
+    word-wrap : break-word ;
+
+	text-align:center;
+}
+table.datagrid3 td{
+    padding: 1px;
+	border: 1px #2a7fb7 solid;
+	word-break: break-all;
+    word-wrap : break-word ;
+	
+}
+table.datagrid3 td1{
+    width:80%;
+    padding: 1px;
+	border: 1px #2a7fb7 solid;
+	word-break: break-all;
+    word-wrap : break-word ;
+}
+table.datagrid3 tr{
+    height:15px;
+    padding: 1px;
+	border: 0px solid blue;
+}
+}
+</style>
+<body>
+   <form>
+	<table  class="datagrid2" id="report" style='margin-top:10px;text-align:center;'>
+		<tbody>
+<!-- 			<tr style='border:none;text-align:left;'> -->
+<!--             <td style='border:none' colspan='3'> -->
+<!--             <font  size="3px" style="color:#2a7fb7;"> -->
+<!-- 			<strong><a href="http://220.181.158.228:8080/jenkins/job/DianJing_eapi_online_centor/" target=_blank>构建平台</a></strong> -->
+<!-- 			</font> -->
+<!--             </td> -->
+<!--             </tr> -->
+    		<tr style='border:none;text-align:left;'>
+            <td style='border:none' colspan='3'>
+            <font  size="3px" style="color:#2a7fb7;"><strong>#title#</strong></font>
+            </td>
+            </tr>
+            <tr width="100%">
+                <th><font style="color:#FFF5EE;" size="2px">#case_name#</font></th>
+    			<th><font style="color:#FFF5EE;" size="2px">#case_total#</font></th>
+    			<th><font style="color:#FFF5EE;" size="2px">#passed_name#</font></th>
+    			<th><font style="color:#FFF5EE;" size="2px">#failed_name#</font></th>
+    			<th><font style="color:#FFF5EE;" size="2px">#skipped_name#</font></th>
+                <th><font style="color:#FFF5EE;" size="2px">#started_name#</font></th>
+                <th><font style="color:#FFF5EE;" size="2px">#finished_name#</font></th>
+                <th><font style="color:#FFF5EE;" size="2px">#duration_name#(ms)</font></th>
+    		</tr>
+             <tr width="100%">
+                <td><font size="2px">#casename#</font></th>
+    			<td><font size="2px">#total#</font></th>
+    			<td style="background:#66CDAA"><font size="2px">#passed#</font></th>
+    			<td style="background:#FF6A6A"><font size="2px"><strong>#failed#</strong></font></th>
+    			<td style="background:#FFD700"><font size="2px">#skipped#</font></th>
+                <td><font size="2px">#started_at#</font></th>
+                <td><font size="2px">#finished_at#</font></th>
+                <td><font size="2px">#duration_ms#</font></th>
+    		</tr>
+		</tbody>
+	</table>   
+    
+
+    <table  class="datagrid3" id="details" style='border:none;margin-top: 10px;text-align:center;width: 955px;'>
+        <tbody>
+            <tr style='border:none;text-align:left;'>
+<!--                 <td style='border:none' colspan='3'><font  size="3px" style="color:#2a7fb7;"><strong>#case_desc#</strong></font> -->
+			<td style='border:none' colspan='3'><font  size="3px" style="color:#2a7fb7;">
+			<strong><a href="#report_url#" target=_blank>#case_desc#</a></strong></font>
+                </td>
+            </tr>
+<!--             <tr> -->
+<!--                 <th style='width:5%;'><font style="color:#FFF5EE;" size="2px">#case_num#</font></th> -->
+<!--                 <th style='width:20%;'><font style="color:#FFF5EE;" size="2px">#case_name2#</font></th> -->
+<!--                 <th style='width:5%;'><font style="color:#FFF5EE;" size="2px">#case_result#</font></th>  -->
+<!--                 <th><font style="color:#FFF5EE;" size="2px">#result_desc#</font></th>   -->
+<!--             </tr> -->
+<!--             #message# -->
+        </tbody>
+    </table>
+    </form>
+</body>
+</html>

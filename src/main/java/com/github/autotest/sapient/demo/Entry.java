@@ -44,6 +44,9 @@ public class Entry {
 		//输出执行结果
 		System.out.print("任务执行结果："+report.getResMsg()+"\n");
 		if (report.getResNo()>-1) {
+			//生成美化后的邮件报告（使用时打开注解）
+//			HtmlFile mailReport = new HtmlFile();
+//			String filename = mailReport.MailHtml();			
 			System.out.print("任务名称："+report.getTaskName()+"\n");
 			System.out.print("任务执行时间："+report.getSumTime()+"毫秒\n");
 			System.out.print("Html报告："+report.getHtmlReport()+"/index.html\n");

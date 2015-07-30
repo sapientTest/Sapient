@@ -10,3 +10,4 @@ mvn test命令执行 或者在eclipse中执行Entry
 -------------------------------
 1. 配置统计由IftConf.properties文件设置;  
 2. 简化DemoCasesUtils类;
+3. 增加生成美化后的邮件报告;
