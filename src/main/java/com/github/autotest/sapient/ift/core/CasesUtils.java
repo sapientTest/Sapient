@@ -591,7 +591,7 @@ public class CasesUtils {
 	 * @param posturl 参数键值对 格式key=value&key=value
 	 * @return ResponseInfo
 	 */
-	public ResponseInfo ExecPostResquest(TreeMap<String, String> header,String http, String posturl) {
+	private ResponseInfo ExecPostResquest(TreeMap<String, String> header,String http, String posturl) {
 		ResponseInfo resInfo=new ResponseInfo();
 		// 设置发起请求时使用的编码
 		try {
@@ -613,7 +613,7 @@ public class CasesUtils {
 	 * @param gethttpurl get请求的url 包括参数键值对 ...?key=value&key=value
 	 * @return ResponseInfo
 	 */
-	public ResponseInfo ExecGetResquest(TreeMap<String, String> header,String gethttpurl) {
+	private ResponseInfo ExecGetResquest(TreeMap<String, String> header,String gethttpurl) {
 		ResponseInfo resInfo=new ResponseInfo();
 		try {
 			// 发起请求
@@ -621,7 +621,7 @@ public class CasesUtils {
 			resInfo.setHttpUrl(gethttpurl);
 		} catch (Exception e) {
 			log.error("发送http请求" + gethttpurl + "失败，请检查");
-			log.error(e.getMessage());
+			log.error(e);
 			resInfo.setErrMsgInfo("发送http请求" + gethttpurl + "失败，请检查");
 			return resInfo;
 		}
