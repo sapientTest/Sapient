@@ -23,7 +23,7 @@ public class CompareResultTest {
 	@Test(description="普通的数据比较key=value",dataProvider = "exp01")
 	public void CompareStrTest01(String expValue,boolean expResult,String mssage){
 		String actValue = "{\"errno\":0,\"data\":{\"clicks\":\"8\",\"views\":\"18\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"2\"}}";
-		boolean actres = compResult.getCompareResult(expValue, actValue,2);
+		boolean actres = compResult.getCompareResult(expValue, actValue,0);
 		org.testng.Assert.assertTrue(expResult==actres, mssage);
 	}
 	
@@ -36,7 +36,7 @@ public class CompareResultTest {
 	@Test(description="支持多个键值对的比对",dataProvider="exp02")
 	public void CompareStrTest02(String expValue,boolean expResult,String msg){
 		String actValue = "{\"errno\":0,\"data\":{\"clicks\":\"8\",\"views\":\"18\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"2\"}}";
-		boolean actres = compResult.getCompareResult(expValue, actValue,2);
+		boolean actres = compResult.getCompareResult(expValue, actValue,0);
 		org.testng.Assert.assertTrue(expResult==actres, msg);
 	}
 	
@@ -66,7 +66,7 @@ public class CompareResultTest {
 		String actValue = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <creative_getIdListByGroupId_response> <creativeIdList list=\"true\"> "
 				+ "<item>3049732936</item> <item>3049732168</item> <item>3049738568</item> <item>3083317320</item> <item>3989263944</item> "
 				+ "</creativeIdList> </creative_getIdListByGroupId_response>";
-		boolean actres = compResult.getCompareResult(expValue,actValue,2);
+		boolean actres = compResult.getCompareResult(expValue,actValue,0);
 		org.testng.Assert.assertTrue(expResult==actres, msg);
 	}
 	
@@ -82,7 +82,7 @@ public class CompareResultTest {
 		String actValue = "{\"errno\":0,\"data\":[{\"clicks\":\"8\",\"views\":\"18\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"2\"},"
 				+ "{\"clicks\":\"7\",\"views\":\"16\",\"total_cost\":\"9.00\",\"ad_plan_id\":\"1\"},"
 				+ "{\"clicks\":\"9\",\"views\":\"19\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"3\"}]}";
-		boolean actres = compResult.getCompareResult(expValue, actValue,2);
+		boolean actres = compResult.getCompareResult(expValue, actValue,0);
 		org.testng.Assert.assertTrue(expResult==actres);
 	}
 	
@@ -100,7 +100,7 @@ public class CompareResultTest {
 		String actValue = "{\"errno\":0,\"data\":[{\"clicks\":\"8\",\"views\":\"18\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"2\"},"
 				+ "{\"clicks\":\"7\",\"views\":\"16\",\"total_cost\":\"9.00\",\"ad_plan_id\":\"1\"},"
 				+ "{\"clicks\":\"9\",\"views\":\"19\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"3\"}]}";
-		boolean actres =  compResult.getCompareResult(expValue,actValue,2); //实际结果
+		boolean actres =  compResult.getCompareResult(expValue,actValue,0); //实际结果
 
 		org.testng.Assert.assertTrue(expResult==actres, "能正确匹配预期结果中的数组");
 	}

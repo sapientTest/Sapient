@@ -2,7 +2,9 @@ package com.github.autotest.sapient.ift.testcase.format;
 import java.util.List;
 
 import com.github.autotest.sapient.ift.IftConf;
+import com.github.autotest.sapient.toolkit.util.CommUtils;
 import com.github.autotest.sapient.toolkit.util.ExcelUtil;
+import com.github.autotest.sapient.toolkit.util.LogUtil;
 
 /**
  * 功能说明：从excel表中读取用例数据文件
@@ -18,6 +20,7 @@ public class ReadCaseFromExcel {
 	private String[] argKey;
 	private String[] argValue;
 
+	private static LogUtil log = LogUtil.getLogger(CommUtils.class);// 日志记录
 	/**
 	 * 构造函数
 	 * @param pathName
@@ -70,7 +73,13 @@ public class ReadCaseFromExcel {
 	 * 
 	 */
 	public int readArgCount(){
-		this.argcount = Integer.parseInt(excel.getCellValue(IftConf.argCountRow, IftConf.argCountCol).trim());
+		try{
+			this.argcount = Integer.parseInt(excel.getCellValue(IftConf.argCountRow, IftConf.argCountCol).trim());
+		}catch(NumberFormatException e){
+			this.argcount = 0;
+			log.error("类型转换导常（excel中的ArgCount必须为int类型且为必填项，不设置签名可设值为 0）："+e);
+		}
+		
 		return this.argcount;	
 	}
 	

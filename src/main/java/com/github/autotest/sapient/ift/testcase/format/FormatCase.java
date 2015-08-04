@@ -79,7 +79,7 @@ public class FormatCase {
 			// 读取【j+1】行的数据
 			String[] argValue = readCase.readArgValue(j);
 //			System.out.print("行："+j+"    参数个数"+argValue.length+argValue[1]+"\n");
-			if (!argValue[IftConf.isRunCol].equals("Y")) {
+			if (!argValue[IftConf.isRunCol].equalsIgnoreCase("Y")) {
 				continue;
 			} else {
 				// 把数据和标题一一对应存入LinkedHashMap有序键值对中
