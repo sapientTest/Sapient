@@ -42,7 +42,7 @@ public class CompareResult {
 	 * @param config 可选参数默认为1，只解析一层，0时全解析
 	 * @return boolean 相同时返回true，不同时返回false
 	 */
-	public boolean getCompareResult(String expRes, String actRes,int config){
+	private boolean getCompareResult(String expRes, String actRes,int config){
 		//开始比对之前，清空已整理后的预期与实际结果字符串
 		setClearActres("");
 		setClearExpres("");
@@ -89,7 +89,7 @@ public class CompareResult {
 	 * @return boolean 相同时返回true，不同时返回false
 	 */
 	public boolean getCompareResult(String expRes, String actRes) {
-		return getCompareResult(expRes,actRes,IftConf.parseJson);
+		return getCompareResult(expRes,actRes,IftConf.JsonNum);
 	}
 
 	/**

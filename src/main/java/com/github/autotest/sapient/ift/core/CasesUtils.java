@@ -149,32 +149,19 @@ public class CasesUtils {
 		if (expRes=="" || null==expRes) {
 			expRes="预期结果为空";
 		}
-		//获取处理后的实际结果 目前只支持json\xml格式  如果接口返回结果不是此两种格式 则需要把actRes转换为json或xml格式
-		String actRes= resInfo.getResBodyInfo();
 		//对比actRes与expRes
-		return getIFtResultInfo(resInfo, expRes,actRes);
+		return getIFtResultInfo(resInfo, expRes);
 	}
 
-	
 	/**
 	 * 返回结果比对后的信息
 	 * @param resInfo http请求后返回的信息
 	 * @param expRes 从用例中读取的预期结果
-	 * @param actRes 格式化后的实际结果 目前只支持json和xml格式
 	 * @return IFtResultInfo
 	 */
-	public IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,String expRes,String actRes) {
-		return getIFtResultInfo(resInfo, expRes,actRes, IftConf.JsonNum);
-	}
-	/**
-	 * 返回结果比对后的信息
-	 * @param resInfo http请求后返回的信息
-	 * @param expRes 从用例中读取的预期结果
-	 * @param actRes 格式化后的实际结果 目前只支持json和xml格式
-	 * @param parseJson json的解析方式 默认为单层解析
-	 * @return IFtResultInfo
-	 */
-	private IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,String expRes,String actRes,int parseJson) {
+	private IFtResultInfo getIFtResultInfo(ResponseInfo resInfo,String expRes) {
+		//获取处理后的实际结果 目前只支持json\xml格式  如果接口返回结果不是此两种格式 则需要把actRes转换为json或xml格式
+		String actRes= resInfo.getResBodyInfo();
 		IFtResultInfo iFtResultInfo =  new IFtResultInfo();
 		//结果比对处理类 目前只能处理json和xml格式
 		CompareResult comresult=new CompareResult();
@@ -199,13 +186,13 @@ public class CasesUtils {
 					}
 				}else{
 					//结果比对
-					compareRes=comresult.getCompareResult(expRes,actRes,parseJson);//解析json串
+					compareRes=comresult.getCompareResult(expRes,actRes);//解析json串
 					actRes=comresult.getClearActres();
 					expRes=comresult.getClearExpres();
 				}				
 			}else{
 				//结果比对
-				compareRes=comresult.getCompareResult(expRes,actRes,parseJson);//解析json串
+				compareRes=comresult.getCompareResult(expRes,actRes);//解析json串
 				actRes=comresult.getClearActres();
 				expRes=comresult.getClearExpres();
 			}

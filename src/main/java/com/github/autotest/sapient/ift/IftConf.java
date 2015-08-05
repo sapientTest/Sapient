@@ -118,12 +118,6 @@ public class IftConf{
 	
     //解析json层级(0为多层解析，1为单层解析)
 	    public static int JsonNum = Integer.parseInt(getPropValue("JsonNum","0"));
-       
-	//结果比对参数
-		/**
-		 * json默认解析方式 单层解析
-		 */
-		public static final int parseJson = 1;
 		
     //测试用例Excel文件读取 相关配置信息
 		/**
