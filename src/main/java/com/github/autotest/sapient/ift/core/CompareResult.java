@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.TreeMap;
-
 import com.github.autotest.sapient.ift.IftConf;
 import com.github.autotest.sapient.toolkit.util.CommUtils;
 import com.github.autotest.sapient.toolkit.util.JsonUtil;
@@ -271,7 +270,7 @@ public class CompareResult {
 			if (map.size()<1) {
 				map.put("解析xml格式错误", "---"+responseRes);
 			}
-		} else{
+		} else if(StringUtil.isJson(responseRes)){  //判断是否为Json结构
 			if(config == 1){//单层方式解析json串
 				map = JsonUtil.getResult(responseRes);
 			}else if(config == 0){//多层方式解析json串
@@ -284,6 +283,9 @@ public class CompareResult {
 				return trimactres;
 			}
 			
+		}else{   //即不是xml又不是Json则直接返回key为reponse，value为返回的全部字符串信息
+			trimactres.put("reponse", responseRes);
+			return trimactres;
 		}
 		for (Iterator<Entry<String, Object>> it = map.entrySet().iterator(); it.hasNext();) {   //object类型转换成String类型
 			@SuppressWarnings("rawtypes")

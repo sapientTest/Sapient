@@ -646,7 +646,7 @@ public class CasesUtils {
 					paraValue.put(para, value);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					System.out.println(e);
+					log.error(e);
 					e.printStackTrace();
 				}
     		 }

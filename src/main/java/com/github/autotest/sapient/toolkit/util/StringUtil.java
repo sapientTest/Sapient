@@ -320,15 +320,17 @@ public class StringUtil {
 	public static String getStrFromMap(Map<String, String> map) {
 		String str = "";
 		try {
-			for (Entry<String, String> entry : map.entrySet()) {
-				String key = entry.getKey().toString();
-				String value = entry.getValue().toString();
-				str += key + "=" + value + "&";
+			if(map.size()>0){ //map必须大于0
+				for (Entry<String, String> entry : map.entrySet()) {
+					String key = entry.getKey().toString();
+					String value = entry.getValue().toString();
+					str += key + "=" + value + "&";
+				}
+				str = str.substring(0, str.length() - 1);
 			}
-			str = str.substring(0, str.length() - 1);
 		} catch (Exception e) {
 			log.error("从map中转换为字符串失败");
-			log.error(e.getMessage());
+			log.error(e);
 		}
 
 		return str;
@@ -503,5 +505,19 @@ public class StringUtil {
 		}
 		return str;   
 	}
+	
+	/**
+	 * 判断是否是json结构 
+	 * @param value
+	 * @return
+	 */
+    public static boolean isJson(String value) {  
+        try {  
+        	JSONObject.fromObject(value);  
+        } catch (JSONException e) {  
+            return false;  
+        }  
+        return true;  
+    }
 	
 }
