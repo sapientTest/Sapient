@@ -1,12 +1,11 @@
 package com.github.autotest.sapient.demo.project;
 
-import java.util.TreeMap;
-
 import com.github.autotest.sapient.ift.core.CasesUtils;
 import com.github.autotest.sapient.ift.core.IFtResultInfo;
 import com.github.autotest.sapient.ift.testcase.IftTestCase;
 import com.github.autotest.sapient.ift.util.CommonSign;
 import com.github.autotest.sapient.toolkit.httpclient.ResponseInfo;
+import com.github.autotest.sapient.toolkit.util.CommUtils;
 
 /**
  * 说明：接口执行类，必须继承自类CasesUtils
@@ -25,7 +24,7 @@ public class DemoCasesUtils {
 	public IFtResultInfo DemoMethod1(IftTestCase testcase)  {
 		CasesUtils casesUtils = new CasesUtils();
 		//暂停100毫秒
-//		BaseTools.sleep(100);
+		//CommUtils.sleep(100);
 		//更新用例的签名计算、url参数、form参数、header参数--必须
 		testcase=casesUtils.updateAllToListForCase(testcase, DemoConf.GetPara, DemoConf.PostPara, DemoConf.HeardPara,new DemoConf());
 		//更新用例参数值，针对rand、timetamp、date等特殊标识处理--必须
