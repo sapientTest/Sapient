@@ -115,9 +115,9 @@ public class StringUtil {
 	}
 	
 	/**
-	 * 判断字符串中是否包含数字
+	 * 判断字符串中是否为数字内容
 	 * @param src
-	 * @return boolean 有数字时返回true 否则false
+	 * @return boolean 是数字时返回true 否则false
 	 */
 	public static boolean isNumeric(String src) {
 		Pattern numericPattern = Pattern.compile("^[0-9]+$");

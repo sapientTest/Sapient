@@ -158,6 +158,28 @@ public class CompareResult {
 		} else {
 			return false;
 		}
+	}	
+	/**
+	 * 预期结果与实际结果进行比较（对实际果进行处理）
+	 * @param expValue
+	 * @param actValue
+	 * @return
+	 */
+	private boolean CompareActProcess(String expValue,String actValue){
+		if (actValue.startsWith("[") && actValue.endsWith("]")) { //实际结果为数组形式
+			String[] actValueList = StringUtil.stringToArray(actValue);
+			int len =actValueList.length;
+			for(int i=0;i<len;i++){
+				if(actValueList[i].trim().equals(expValue)) return true;
+			}
+			return false;
+		}
+		
+		if (expValue.contains("int")) { // 预期结果中有int关键字
+			return StringUtil.isNumeric(actValue);
+		}
+			
+		return actValue.equals(expValue); //不需要特殊处理直接比较
 	}
 
 	/**
@@ -170,61 +192,38 @@ public class CompareResult {
 	private boolean CompareStr(String expValue, String actValue) {
 		// 预期结果与实际结果任一为null，返回false
 		if (null == actValue || null == expValue)	return false;
-		// 判断实际结果是否为数组格式
-		if (actValue.startsWith("[") && actValue.endsWith("]")) {
-			String[] actValueList = StringUtil.stringToArray(actValue);
-			// 判断预期结果是否来数组格式(预期结果包含[])
-			if (expValue.startsWith("[") && expValue.endsWith("]")) {
-				String[] expArray = StringUtil.stringToArray(expValue);
+		// 判断预期结果是否为数组格式
+		if (expValue.startsWith("[") && expValue.endsWith("]")) {
+			String[] expArray = StringUtil.stringToArray(expValue);			
+			// 判断实际结果是否数组格式(预期结果包含[])
+			if (actValue.startsWith("[") && actValue.endsWith("]")) {
+				String[] actValueList = StringUtil.stringToArray(actValue);
 				if (actValueList.length == expArray.length) { // 判断实际结果与预期结果的数组长度是否相同，不相同则直接返回错误
 					for (int i = 0; i < actValueList.length; i++) {
-						if (!(actValueList[i].trim())
-								.equals(expArray[i].trim())) { // 判断实际结果与预期结果中的数据组是否相同
+						if (!CompareActProcess(expArray[i].trim(),actValueList[i].trim())) { // 判断实际结果与预期结果中的数据组是否相同，不相同返回false
 							return false;
 						}
 					}
-					// 预期结果与实际结果的数组长度不相等，则直接返回false
-				} else {
+					return true; //预期数据与实际数的每个值都相等
+				} else {// 预期结果与实际结果的数组长度不相等，则直接返回false
 					return false;
 				}
-				// 预期结果为非数组，则判断预期结果是否包含在实际结果中
-			} else {
-				int len = actValueList.length;
-				for (int i = 0; i < len; i++) {
-					if ((actValueList[i].trim()).equals(expValue.trim())) {
-						return true;
-					}
-
-				}
-			}
-			return true;
-		} else {
-
-			// 判断是否有多个预期结果值(预期结果中包含#，进入下面方法)
-			if (expValue.contains("#")) {
-				String[] allExpValue2 = expValue.split("#");
-				for (int i = 0; i < allExpValue2.length; i++) {
-					if (actValue.equals(allExpValue2[i])) {
-						return true;
-					}
-				}
-				return false;// 返回结果
-			}
-
-			// 仅1个预期结果值,并对int关键词做处理
-			if (expValue.contains("int")) { // 预期结果中有int值
-				if (actValue.matches("[0-9]+") & !actValue.equals("0")) { // 匹配int类型实际结果，但实际结果不能为0
-					return true;
-				} else {
-					return false;
-				}
-			} else if (!actValue.equalsIgnoreCase(expValue)) { // 预期结果中没有int值
-				return false;
-			} else {
-				return true;
-			}
+			} 
 		}
-
+		
+		// 判断是否有多个预期结果值(预期结果中包含#，进入下面方法)
+		if (expValue.contains("#")) {
+			String[] allExpValue2 = expValue.split("#");
+			for (int i = 0; i < allExpValue2.length; i++) {
+				if (actValue.equals(allExpValue2[i])) {
+					return true;
+				}
+				
+			}
+			return false;// 返回结果
+		}
+		
+		return CompareActProcess(expValue,actValue);
 	}
 
 	/**

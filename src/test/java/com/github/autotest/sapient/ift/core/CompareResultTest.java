@@ -72,16 +72,14 @@ public class CompareResultTest {
 	
 	@DataProvider(name="exp05")
 	public Object[][] createData05(){
-		Object[][] retObjArr={{"clicks=int",true,"测试点：预期结果为int，符合要求"},{"errno=int",false,"测试点:预期结果为int但实际结果为0，0不包含在int范围内"}};
+		Object[][] retObjArr={{"clicks=int",true,"测试点：预期结果为int，符合要求"},{"errno=int",true,"测试点:预期结果为int但实际结果为0"}};
 		return retObjArr;
 	}
 	
 	
 	@Test(description="预期结果中0不包含在",dataProvider="exp05")
 	public void CompareStrTest05(String expValue,boolean expResult,String msg){
-		String actValue = "{\"errno\":0,\"data\":[{\"clicks\":\"8\",\"views\":\"18\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"2\"},"
-				+ "{\"clicks\":\"7\",\"views\":\"16\",\"total_cost\":\"9.00\",\"ad_plan_id\":\"1\"},"
-				+ "{\"clicks\":\"9\",\"views\":\"19\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"3\"}]}";
+		String actValue = "{\"errno\":0,\"data\":[{\"clicks\":\"8\",\"views\":\"18\",\"total_cost\":\"10.00\",\"ad_plan_id\":\"2\"}]}";
 		boolean actres = compResult.getCompareResult(expValue, actValue);
 		org.testng.Assert.assertTrue(expResult==actres);
 	}
@@ -90,7 +88,7 @@ public class CompareResultTest {
     public Object[][] createData() {  
         Object[][] retObjArr = { { "clicks=[8,7,9]", true ,"测试点：json数组完全匹配"},  
                { "clicks=[8,9,8]", false,"测试点:json数组中部分值错误" }, { "click=[8,7]", false ,"测试点：json预期结果必须完全包含实际结果的值"},  
-                { "clicks=9", true,"" } };  
+                { "clicks=9", true,"" } ,{"click=10",false,"预期结果不包含在实际结果数组中"}};  
         return (retObjArr);  
     } 
 	
