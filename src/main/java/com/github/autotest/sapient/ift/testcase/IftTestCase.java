@@ -272,5 +272,19 @@ public class IftTestCase {
 	public void setTestPoint(String testPoint) {
 		this.testPoint = testPoint;
 	}
+	@Override
+	public String toString() {
+		return "IftTestCase [url=" + this.url + ", httpMethod="
+				+ this.httpMethod + ", argCount=" + this.argCount
+				+ ", enCoding=" + this.enCoding + ", casesetName="
+				+ this.casesetName + ", templatePath=" + this.templatePath
+				+ ", cookie=" + this.cookie + ", secretKey=" + this.secretKey
+				+ ", signKey=" + this.signKey + ", signFlag=" + this.signFlag
+				+ ", caseMap=" + this.caseMap + ", paralist=" + this.paralist
+				+ ", formlist=" + this.formlist + ", signlist=" + this.signlist
+				+ ", headerlist=" + this.headerlist + ", headerMap="
+				+ this.headerMap + ", results=" + this.results + ", caseId="
+				+ this.caseId + ", testPoint=" + this.testPoint + "]";
+	}
 	
 }
