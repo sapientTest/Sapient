@@ -23,6 +23,7 @@ public class DemoCasesUtils {
 	 */
 	public IFtResultInfo DemoMethod1(IftTestCase testcase)  {
 		CasesUtils casesUtils = new CasesUtils();
+		//IftConf.JsonNum = 0;
 		//暂停100毫秒
 		//CommUtils.sleep(100);
 		//更新用例的签名计算、url参数、form参数、header参数--必须
