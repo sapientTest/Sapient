@@ -16,8 +16,9 @@ public class CommonSign {
 	private static LogUtil log = LogUtil.getLogger(CommonSign.class);// 日志记录
 
 	/**
-	 * 说明：签名算法1 key=value&key=value&.....key=valuesecret_key 最后连接私钥时不带&符号
-	 * 计算MD5时，中文按照UTF-8编码计算
+	 * 说明：1.签名算法1 key=value&key=value&.....key=valuesecret_key 
+	 * 2.最后连接私钥时不带&符号
+	 * 3.计算MD5时，中文按照UTF-8编码计算
 	 * @param signpara 参与签名计算的键值对
 	 * @param secret_key 签名计算所需的密钥
 	 * @return String
@@ -43,8 +44,9 @@ public class CommonSign {
 	}
 
 	/**
-	 * 说明：签名算法2 key=value&key=value&.....key=valuesecret_key 最后连接私钥时不带&符号
-	 * 计算MD5时，中文按照GBK编码计算
+	 * 说明：1.签名算法2 key=value&key=value&.....key=valuesecret_key 
+	 * 2.最后连接私钥时不带&符号
+	 * 3.计算MD5时，中文按照GBK编码计算
 	 * @param signpara 参与签名计算的键值对
 	 * @param secret_key 签名计算所需的密钥
 	 * @return String
@@ -70,8 +72,10 @@ public class CommonSign {
 	}
 
 	/**
-	 * 说明：签名算法3 value为空时 不参与签名计算 key=value&key=value&.....key=valuesecret_key
-	 * 最后连接私钥时不带&符号 计算MD5时，中文按照UTF-8编码计算
+	 * 说明：签名算法3  1.key=value&key=value&.....key=valuesecret_key
+	 * 2.value为空时 不参与签名计算
+	 * 3.最后连接私钥时不带&符号 
+	 * 4.计算MD5时，中文按照UTF-8编码计算
 	 * 
 	 * @param signpara 参与签名计算的键值对
 	 * @param secret_key 签名计算所需的密钥
@@ -98,8 +102,10 @@ public class CommonSign {
 	}
 	
 	/**
-	 * 说明：签名算法4 value为空时 不参与签名计算 key=value&key=value&.....key=valuesecret_key
-	 * 最后连接私钥时带&符号 计算MD5时，中文按照UTF-8编码计算
+	 * 说明：签名算法4  1.key=value&key=value&.....key=valuesecret_key
+	 * 2.value为空时 不参与签名计算
+	 * 3.最后连接私钥时带&符号 
+	 * 4.计算MD5时，中文按照UTF-8编码计算
 	 * 
 	 * @param signpara 参与签名计算的键值对
 	 * @param secret_key 签名计算所需的密钥
@@ -114,20 +120,14 @@ public class CommonSign {
 		while (ite.hasNext()) {
 			Entry<?, ?> entry = (Entry<?, ?>) ite.next();
 			if (entry.getValue().toString().length() > 0) {
-				String value=entry.getValue().toString();
-//				if (MyString.isChinese(value)) {
-//					value=CommUtils.urlEncode(value, IEnCoding.UTF8);
-//				}
-				expBaseSign = expBaseSign + entry.getKey() + "=" +value  + "&";
+				expBaseSign = expBaseSign + entry.getKey() + "=" +entry.getValue().toString() + "&";
 			}
 		}
 		if (expBaseSign.length() < 1) {
 			expSign = expBaseSign + secret_key;
 		} else {
-			expSign = expBaseSign.substring(0, expBaseSign.length() - 1) + secret_key;
+			expSign = expBaseSign + secret_key;
 		}
-//		log.info("参与签名的串："+expSign);
-//		log.info("计算后的结果为："+CommUtils.getMD5(expSign,IEnCoding.UTF8));
 		return CommUtils.getMD5(expSign,"UTF-8");
 	}
 }
