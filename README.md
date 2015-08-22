@@ -1,6 +1,3 @@
-Sapient
-========
-
 # [Sapient](https://github.com/sapientTest/Sapient)
 
 Sapient 接口自动化测试框架（工具）
