@@ -11,7 +11,7 @@ Sapient 接口自动化测试框架（工具）
 更多的版本细节 [Release Notes](sapient-doc/ReleaseNotes.md)
 
 ## Why
-Sapient 可以快速帮我们搭建自动化接口测试，并与jenkins等进行集成，用与快速简单的自动化实施;
+*  Sapient 可以快速帮我们搭建自动化接口测试，并与jenkins等进行集成，用与快速简单的自动化实施;
 1. 以excel作为数据驱动源，方便简单管理case;
 2. 支持http,https请求类型;
 3. 报告更简单美化;
