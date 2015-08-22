@@ -1,28 +1,32 @@
 Sapient
 ========
 
-接口自动化测试框架 1.4
+# [Sapient](https://github.com/sapientTest/Sapient)
 
-1.4 更新内容：
--------------------------------
-1. 修复计算签名方法signMethodFour最后连接私钥时未带&符号问题;
-2. 优化读取excel时去掉换行符及前后空格;
+Sapient 接口自动化测试框架（工具）
 
-1.3 更新内容：
--------------------------------
-1. 修复多层解析时预期结果不包含在实际结果数据中时的判断错误;
-2. 去掉关键词对0不包含的处理;
-3. 增加单测及覆盖率统计;
+## Latest Release
+* __1.3__
 
-1.2 更新内容：
--------------------------------
-1. 修复多层解析时，当value为数组(eg:["10:00-20:30"])但不为JsonArray时解析异常; 
-2. 修复当返回结果即不是Json也不是xml时默认使用Json解析时异常;
-3. 优化代码结构,单层解析还是多层解析统一由配置文件进行配置;
+更多的版本细节 [Release Notes](moco-doc/ReleaseNotes.md)
 
+## Why
+Sapient 可以快速帮我们搭建自动化接口测试，并与jenkins等进行集成，用与快速简单的自动化实施;
+1.以excel作为数据驱动源，方便简单管理case;
+2.支持http,https请求类型;
+3.报告更简单美化;
+4.方便与jenkins集成;
+5.定制化的关键字，方便使用动态数据;
+6.可自定义变量，接口依赖更方便;
 
+## Quick Start
+* 下载 [Sapient Demo](https://github.com/sapientTest/Sapient/tree/demo)
+* 按格式修改demo.xlsx文件(如修改xlsx文件名，记得要修改Entry中的文件名称);
+* 修改DemoConf.java文件 添加GetPara与PostPara;
+* Maven test 进行执行;
 
-1.1 更新内容：
--------------------------------
-1. 配置统计由IftConf.properties文件设置;  
-2. 简化DemoCasesUtils类;
+## Documents
+详细的文档可参看 [ doc ] (https://github.com/sapientTest/Sapient/tree/demo/doc)
+
+## 其它
+问题反馈与交流（lianghui163mail@163.com）
