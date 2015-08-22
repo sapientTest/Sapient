@@ -93,7 +93,7 @@ public class ReadCaseFromExcel {
 		this.argKey=new String[excel.getColNum()];
 		List<String>keylist=excel.getRowList(IftConf.typeRow);
 		for (int i = 0; i < keylist.size(); i++) {
-			argKey[i]=keylist.get(i);
+			argKey[i]=keylist.get(i).replace("\n", "").trim(); //去掉换行符与前后空格
 		}
 		return this.argKey;
 	}	
@@ -109,7 +109,7 @@ public class ReadCaseFromExcel {
 		this.argValue=new String[excel.getColNum()];
 		List<String>valuelist=excel.getRowList(argKeynum);
 		for (int i = 0; i < valuelist.size(); i++) {
-			argValue[i]=valuelist.get(i);
+			argValue[i]=valuelist.get(i).replace("\n", "").trim();//去掉换行符与前后空格
 		}
 		return this.argValue;
 		}

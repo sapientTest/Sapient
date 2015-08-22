@@ -120,7 +120,7 @@ public class CasesUtils {
 				resInfo.setHttpUrl(httpUrl + getUrl);
 			} else if (testCase.getHttpMethod().equalsIgnoreCase("post")) {
 				resInfo= httpUtil.post(headersMap, httpUrl+getUrl, postUrl);
-				resInfo.setHttpUrl("post请求的url信息：" + httpUrl + postUrl);
+				resInfo.setHttpUrl("post请求的url信息：" + httpUrl+getUrl +" \n\rPost表单信息为：" + postUrl);
 			} else {// 待扩展
 				
 			}
