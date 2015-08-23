@@ -23,7 +23,10 @@ Sapient 可以快速帮我们搭建自动化接口测试，并与jenkins等进�
 * Maven test 进行执行;
 
 ## Documents
-详细的文档可参看 [ doc ] (https://github.com/sapientTest/Sapient/tree/demo/doc)
+* 详细的文档可参看 [ doc ] (https://github.com/sapientTest/Sapient/tree/demo/doc)
+* [excel中各参数说明 ](sapient-doc/ExcelKeyNotes.md)
+* [定制关键字说明](sapient-doc/KeywordsNotes.md)
+
 
 ## Other
 问题反馈与交流（lianghui163mail@163.com）

@@ -42,7 +42,7 @@ public class ReadCaseFromExcel {
 	 *  @return String 
 	 */
 	public String readUrl(){
-		this.url=excel.getCellValue(IftConf.urlRow, IftConf.urlCol).trim();
+		this.url=excel.getCellValue(IftConf.urlRow, IftConf.urlCol).replace("\n", "").trim();//去掉换行符与前后空格;
 		return this.url;
 	}
 	
@@ -51,7 +51,7 @@ public class ReadCaseFromExcel {
 	 *  @return String 
 	 */
 	public String readHttpMethod(){
-		this.httpMethod = excel.getCellValue(IftConf.methodRow, IftConf.methodCol).trim();
+		this.httpMethod = excel.getCellValue(IftConf.methodRow, IftConf.methodCol).replace("\n", "").trim();//去掉换行符与前后空格;
 		return this.httpMethod;
 	}
 	
@@ -62,7 +62,7 @@ public class ReadCaseFromExcel {
 	 * 
 	 */
 	public String readCookie(){
-		this.cookie = excel.getCellValue(IftConf.cookieRow, IftConf.cookieCol).trim();
+		this.cookie = excel.getCellValue(IftConf.cookieRow, IftConf.cookieCol).replace("\n", "").trim();//去掉换行符与前后空格;
 		return this.cookie;	
 	}
 	
@@ -74,7 +74,7 @@ public class ReadCaseFromExcel {
 	 */
 	public int readArgCount(){
 		try{
-			this.argcount = Integer.parseInt(excel.getCellValue(IftConf.argCountRow, IftConf.argCountCol).trim());
+			this.argcount = Integer.parseInt(excel.getCellValue(IftConf.argCountRow, IftConf.argCountCol).replace("\n", "").trim());//去掉换行符与前后空格
 		}catch(NumberFormatException e){
 			this.argcount = 0;
 			log.error("类型转换导常（excel中的ArgCount必须为int类型且为必填项，不设置签名可设值为 0）："+e);
